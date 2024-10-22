@@ -52,7 +52,7 @@ class MainActivity: FlutterActivity(){
             .setMethodCallHandler{
                 call,result ->
                     if(call.method.equals("initEkyc")){
-                        print("Method : "+call.method)
+                        print("Methoda : "+call.method)
                     }
             }
     }
