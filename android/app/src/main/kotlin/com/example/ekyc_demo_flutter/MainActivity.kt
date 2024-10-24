@@ -10,7 +10,7 @@ import io.flutter.plugin.common.MethodChannel
 import java.util.UUID
 
 class MainActivity: FlutterActivity() {
-    var token = ""
+    var token = "test"
     var devToken: kotlin.String? = "INSERT YOUR DEV TOKEN HERE"
     var sitToken: String = "INSERT YOUR SIT TOKEN HERE"
     var uatToken: String = "INSERT YOUR UAT TOKEN HERE"
@@ -18,7 +18,7 @@ class MainActivity: FlutterActivity() {
     var prodToken: String = "INSERT YOUR PROD TOKEN HERE"
     var sessionId: String = "7e4f518d-f4ae-447a-a6e4-d4143135e7b1"
     var resultString: String? = null
-    var ekycToken: String = ""
+    var ekycToken: String = "UAT"
     private val ekycUtilities = EkycUtilities()
     private val CHANNEL = "com.test.ekyc/initEkyc"
 
@@ -32,48 +32,45 @@ class MainActivity: FlutterActivity() {
         MethodChannel(flutterEngine.dartExecutor.binaryMessenger, CHANNEL)
             .setMethodCallHandler { call, result ->
                 if (call.method.equals("initEkyc")) {
-                    // รับค่า token และ env จากฝั่ง Flutter
-                    val inputToken = call.argument<String>("token") ?: ""
-                    val env = call.argument<String>("env") ?: "UAT"
 
-                    // เรียกใช้ฟังก์ชัน livenessCheck
-                    livenessCheck(sessionId, inputToken, env)
+//                    val inputToken = call.argument<String>("token") ?: ""
+//                    val env = call.argument<String>("env") ?: "UAT"
+
+
+                    livenessCheck()
                     result.success("Liveness check initiated")
-                } else {
+                }
+                else {
                     result.notImplemented()
                 }
             }
     }
 
-    fun setSessionId() {
+    private fun setSessionId() {
         this.sessionId = UUID.randomUUID().toString()
     }
 
-    fun setToken(inputToken: String) {
-        if (inputToken.isNotEmpty()) {
-            token = inputToken
-        }
-    }
 
-    fun livenessCheck(sessionId: String, token: String, env: String) {
+    fun livenessCheck() {
         // Set token and session ID
-        setToken(token)
-        setSessionId()
+//        setToken(token)
+//        setSessionId()
 
         // Initialize eKYC
         ekycUtilities.initEkyc(
             applicationContext, // Application context
             this, // Current activity context
-            sessionId, // Session ID
-            token, // eKYC token
-            env, // Environment (UAT, SIT, etc.)
+            UUID.randomUUID().toString(), // Session ID
+            this.token, // eKYC token
+            "UAT", // Environment (UAT, SIT, etc.)
             null, // CustomizeTheme (if applicable)
             null, // Additional settings (optional)
-            object : EkycUtilities.InitCallback { // ใช้ object ของ InitCallback
+            object : EkycUtilities.InitCallback {
                 fun onResult(success: Boolean, description: String, ekycToken: String?) {
                     this@MainActivity.ekycToken = ekycToken ?: ""  // Save ekycToken
 
                     if (success) {
+                        println("success!!")
                         // Call liveness check after successful init
                         ekycUtilities.livenessCheck(
                             this@MainActivity,  // Pass the current Activity context

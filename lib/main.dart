@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ekyc_demo_flutter/service/ekyc_service.dart';
 
 void main() {
   runApp(const MyApp());
@@ -56,7 +57,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
-
+  final EkycService ekycService = EkycService();
   void _incrementCounter() {
     setState(() {
       // This call to setState tells the Flutter framework that something has
@@ -116,10 +117,12 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
+        onPressed: () {
+          ekycService.startEkyc("7e4f518d-f4ae-447a-a6e4-d4143135e7b1", "test");
+        },
         tooltip: 'Increment',
         child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      ),
     );
   }
 }
