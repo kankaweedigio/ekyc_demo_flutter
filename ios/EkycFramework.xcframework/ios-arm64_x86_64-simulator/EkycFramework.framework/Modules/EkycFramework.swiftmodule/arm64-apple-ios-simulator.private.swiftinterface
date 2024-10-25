@@ -1,0 +1,126 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 5.9 (swiftlang-5.9.0.128.108 clang-1500.0.40.1)
+// swift-module-flags: -target arm64-apple-ios12.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name EkycFramework
+// swift-module-flags-ignorable: -enable-bare-slash-regex
+import AVFoundation
+import DeveloperToolsSupport
+@_exported import EkycFramework
+import FaceTecSDK
+import Foundation
+import Swift
+import SwiftUI
+import UIKit
+import _Concurrency
+import _StringProcessing
+import _SwiftConcurrencyShims
+@_hasMissingDesignatedInitializers public class EkycFrameworkKit {
+  public struct NdidError {
+    public let code: Swift.String?
+  }
+  public struct NdidData {
+    public let referenceId: Swift.String?
+    public let requestId: Swift.String?
+  }
+  public static func initEkyc(sessionId: Swift.String, token: Swift.String, environment: Swift.String, customizeTheme: EkycFramework.CustomizeTheme?, language: Swift.String?, callBack: @escaping (Swift.Bool, Swift.String, Swift.String?) -> Swift.Void)
+  public static func ocrIdCardVerifyByFace(fromViewController: UIKit.UIViewController, checkExpiredIdCard: Swift.Bool?, checkDopa: Swift.Bool?, enableConfirmInfo: Swift.Bool?, ocrPrefill: EkycFramework.OcrPrefill? = nil, callBack: @escaping (Swift.Bool, Swift.String, EkycFramework.DocumentAPIData?, EkycFramework.DocumentAPIData?, EkycFramework.DopaData?) -> Swift.Void)
+  public static func livenessCheck(fromViewController: UIKit.UIViewController, callBack: @escaping (Swift.Bool, Swift.String) -> Swift.Void)
+  public static func presentReviewDocument(viewController: UIKit.UIViewController, responseData: Swift.String)
+  public static func ndidVerification(fromViewController: UIKit.UIViewController, identifierType: Swift.String, identifierValue: Swift.String, serviceId: Swift.String, callBack: @escaping (Swift.Bool, Swift.String, Swift.String?, EkycFramework.EkycFrameworkKit.NdidError?, EkycFramework.EkycFrameworkKit.NdidData?) -> Swift.Void)
+  @objc deinit
+}
+public struct DopaData {
+  public var code: Swift.String?
+  public var desc: Swift.String?
+  public init(code: Swift.String?, desc: Swift.String?)
+}
+public struct DocumentAPIData : Swift.Codable {
+  public var nationalId: Swift.String
+  public var titleTh: Swift.String
+  public var titleEn: Swift.String
+  public var firstNameTh: Swift.String
+  public var firstNameEn: Swift.String
+  public var middleNameTh: Swift.String
+  public var middleNameEn: Swift.String
+  public var lastNameTh: Swift.String
+  public var lastNameEn: Swift.String
+  public var dateOfBirth: Swift.String
+  public var dateOfIssue: Swift.String
+  public var dateOfExpiry: Swift.String
+  public var laserId: Swift.String
+  public init(nationalId: Swift.String, titleTh: Swift.String, titleEn: Swift.String, firstNameTh: Swift.String, firstNameEn: Swift.String, middleNameTh: Swift.String, middleNameEn: Swift.String, lastNameTh: Swift.String, lastNameEn: Swift.String, dateOfBirth: Swift.String, dateOfIssue: Swift.String, dateOfExpiry: Swift.String, laserId: Swift.String)
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct DocumentValidateData {
+  public var idCardNumber: Swift.String
+  public var titleTh: Swift.String
+  public var titleEn: Swift.String
+  public var firstNameTh: Swift.String
+  public var firstNameEn: Swift.String
+  public var middleNameEn: Swift.String
+  public var middleNameTh: Swift.String
+  public var lastNameTh: Swift.String
+  public var lastNameEn: Swift.String
+  public var dateOfBirth: Swift.String
+  public var dateOfIssue: Swift.String
+  public var dateOfExpire: Swift.String
+  public var laserId: Swift.String
+  public init(idCardNumber: Swift.String, titleTh: Swift.String, titleEn: Swift.String, firstNameTh: Swift.String, firstNameEn: Swift.String, middleNameTh: Swift.String, middleNameEn: Swift.String, lastNameTh: Swift.String, lastNameEn: Swift.String, dateOfBirth: Swift.String, dateOfIssue: Swift.String, dateOfExpire: Swift.String, laserId: Swift.String)
+}
+public protocol JSONValue {
+}
+public protocol JSONRoot {
+}
+extension Swift.String : EkycFramework.JSONValue {
+}
+extension Swift.Int : EkycFramework.JSONValue {
+}
+extension Swift.Double : EkycFramework.JSONValue {
+}
+extension Foundation.Decimal : EkycFramework.JSONValue {
+}
+extension Swift.Bool : EkycFramework.JSONValue {
+}
+extension Swift.Optional : EkycFramework.JSONValue {
+}
+extension Swift.Array : EkycFramework.JSONValue, EkycFramework.JSONRoot {
+}
+extension Swift.Dictionary : EkycFramework.JSONValue, EkycFramework.JSONRoot {
+}
+public struct CustomizeTheme {
+  public init(text: EkycFramework.Text? = nil, button: EkycFramework.Button? = nil, oval: EkycFramework.Oval? = nil, ocr: EkycFramework.Ocr? = nil, image: EkycFramework.Image? = nil, border: EkycFramework.Border? = nil, ndid: EkycFramework.Ndid? = nil, other: EkycFramework.Other? = nil)
+}
+public struct Text {
+  public init(fontName: UIKit.UIFont? = nil, linkColor: UIKit.UIColor? = nil, primaryTextColor: UIKit.UIColor? = nil, secondaryTextColor: UIKit.UIColor? = nil, secondaryTextBackgroundColor: UIKit.UIColor? = nil)
+}
+public struct Button {
+  public init(normalTextColor: UIKit.UIColor? = nil, normalBackgroundColor: UIKit.UIColor? = nil, disabledTextColor: UIKit.UIColor? = nil, disabledBackgroundColor: UIKit.UIColor? = nil, highlightTextColor: UIKit.UIColor? = nil, highlightBackgroundColor: UIKit.UIColor? = nil, outlineTextColor: UIKit.UIColor? = nil, outlineBackgroundColor: UIKit.UIColor? = nil, outlineBorderColor: UIKit.UIColor? = nil)
+}
+public struct Ocr {
+  public init(mainHeaderTextColor: UIKit.UIColor? = nil, sectionHeaderTextColor: UIKit.UIColor? = nil, labelTextColor: UIKit.UIColor? = nil)
+}
+public struct Oval {
+  public init(strokeColor: UIKit.UIColor?)
+}
+public struct Other {
+  public init(backgroundColor: UIKit.UIColor? = nil, progressColor: UIKit.UIColor? = nil)
+}
+public struct Image {
+  public init(logo: UIKit.UIImage? = nil, closeImage: UIKit.UIImage? = nil, idCardImage: UIKit.UIImage? = nil, permissionCameraImage: UIKit.UIImage? = nil, activeFlash: UIKit.UIImage? = nil, inactiveFlash: UIKit.UIImage? = nil)
+}
+public struct Border {
+  public init(borderColor: UIKit.UIColor? = nil, selectedBorderColor: UIKit.UIColor? = nil)
+}
+public struct Ndid {
+  public init(successIcon: UIKit.UIImage? = nil, errorIcon: UIKit.UIImage? = nil, timerColor: UIKit.UIColor? = nil, timerBackgroundColor: UIKit.UIColor? = nil)
+}
+@objc @_inheritsConvenienceInitializers @_Concurrency.MainActor(unsafe) public class OcrIdCardPreLoadViewController : UIKit.UIViewController {
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public func awakeFromNib()
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public func viewDidLoad()
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public init(nibName nibNameOrNil: Swift.String?, bundle nibBundleOrNil: Foundation.Bundle?)
+  @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder: Foundation.NSCoder)
+  @objc deinit
+}
+public struct OcrPrefill {
+  public init(titleThFlag: Swift.Bool? = true, titleEnFlag: Swift.Bool? = true, firstNameThFlag: Swift.Bool? = true, firstNameEnFlag: Swift.Bool? = true, lastNameThFlag: Swift.Bool? = true, lastNameEnFlag: Swift.Bool? = true, dateOfBirthFlag: Swift.Bool? = true, dateOfIssueFlag: Swift.Bool? = true, dateOfExpiryFlag: Swift.Bool? = true, laserIdFlag: Swift.Bool? = true)
+}
